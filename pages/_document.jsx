@@ -20,6 +20,10 @@ class MyDocument extends Document {
                   href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&display=swap"
                   rel="stylesheet"
                />
+               <link
+                  href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+                  rel="stylesheet"
+               />
             </Head>
             <body>
                <Main />

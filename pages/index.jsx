@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Container, ImageGrid } from '../components';
+import { Container, ImageDetails, ImageGrid } from '../components';
 import styles from '../styles/Home.module.css';
 import axios from 'axios';
 
@@ -9,6 +9,10 @@ import { BASE_URL } from '../API';
 export default function Home() {
    const [pageData, setPageData] = useState([]);
    const [page, setPage] = useState(1);
+
+   // note self -> single image & modal
+   const [isModalVisible, setModalVisible] = useState(false);
+   const [imageInfo, setImageInfo] = useState(null);
 
    async function fetchData() {
       const urlPageNo = `&page=${page}`;
@@ -32,10 +36,25 @@ export default function Home() {
       fetchData();
    }, []);
 
+   const viewImageDetailsHandler = (image) => {
+      setModalVisible(true);
+      setImageInfo(image);
+      console.log(image);
+   };
+
    return (
       <Container>
          <h1>Image Gallary</h1>
-         <ImageGrid pageData={pageData} />
+         <ImageGrid
+            pageData={pageData}
+            showImageModal={viewImageDetailsHandler}
+         />
+         {isModalVisible && (
+            <ImageDetails
+               imageInfo={imageInfo}
+               setModalVisible={setModalVisible}
+            />
+         )}
       </Container>
    );
 }
