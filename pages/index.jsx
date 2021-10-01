@@ -8,6 +8,7 @@ import { BASE_URL } from '../API';
 
 export default function Home() {
    const [pageData, setPageData] = useState([]);
+   const [isDataFetching, setDataFetching] = useState(false);
    const [page, setPage] = useState(1);
 
    // note self -> single image & modal
@@ -26,11 +27,37 @@ export default function Home() {
                }
             }
          );
-         setPageData(response.data);
+         console.log(page);
+         if (page === 1) {
+            return setPageData(response.data);
+         } else {
+            setPageData((prevData) => [...prevData, ...response.data]);
+            setDataFetching(false);
+         }
       } catch (error) {
          console.log(error);
       }
    }
+
+   const handleScroll = () => {
+      if (
+         window.innerHeight + document.documentElement.scrollTop >
+         document.documentElement.offsetHeight
+      ) {
+         setPage((prevState) => prevState + 1);
+         setDataFetching(true);
+      }
+   };
+
+   useEffect(() => {
+      if (!isDataFetching) return;
+      fetchData();
+   }, [isDataFetching]);
+
+   useEffect(() => {
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+   }, []);
 
    useEffect(() => {
       fetchData();
@@ -55,6 +82,7 @@ export default function Home() {
                setModalVisible={setModalVisible}
             />
          )}
+         {isDataFetching && <h1>Loading...</h1>}
       </Container>
    );
 }
