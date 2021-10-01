@@ -20,11 +20,14 @@ export default function Home() {
       (node) => {
          if (isLoading) return;
          if (observer.current) observer.current.disconnect();
-         observer.current = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-               setPage((prevPage) => prevPage + 1);
-            }
-         });
+         observer.current = new IntersectionObserver(
+            (entries) => {
+               if (entries[0].isIntersecting) {
+                  setPage((prevPage) => prevPage + 1);
+               }
+            },
+            { threshold: 1 }
+         );
          if (node) observer.current.observe(node);
       },
       [isLoading]
@@ -59,15 +62,15 @@ export default function Home() {
 
    return (
       <Container>
-         <h1>Image Gallary</h1>
-         {pageData.length > 0 ? (
+         <div className="header">
+            <h1 className="heading">Image Gallary</h1>
+         </div>
+         {pageData.length > 0 && (
             <ImageGrid
                pageData={pageData}
                showImageModal={viewImageDetailsHandler}
                lastElementRef={lastElement}
             />
-         ) : (
-            <i className="bx bx-loader-alt bx-spin"></i>
          )}
          {isModalVisible && (
             <ImageDetails

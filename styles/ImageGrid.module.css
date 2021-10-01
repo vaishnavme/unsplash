@@ -1,7 +1,26 @@
 .container {
    display: grid;
    gap: 1.2rem;
+}
+.grid4 {
    grid-template-columns: repeat(4, 1fr);
+}
+.grid1 {
+   display: block;
+   max-width: 350px;
+   margin: auto;
+   text-align: center;
+}
+.action {
+   margin: 1rem auto;
+   font-size: 2rem;
+   text-align: center;
+}
+.active {
+   color: #2563eb;
+}
+.grid1 .gridItem {
+   margin: 1rem auto;
 }
 .gridItem:hover {
    cursor: pointer;
