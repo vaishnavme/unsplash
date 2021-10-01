@@ -34,7 +34,7 @@ button {
    background-color: var(--white);
 }
 .container {
-   max-width: 90%;
+   max-width: 95%;
    margin: auto;
    padding: 0.5rem;
 }
