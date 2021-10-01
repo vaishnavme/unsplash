@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Container, ImageDetails, ImageGrid } from '../components';
-import styles from '../styles/Home.module.css';
 import axios from 'axios';
 
 //api variables
@@ -9,60 +8,48 @@ const clientId = process.env.NEXT_PUBLIC_API_KEY;
 
 export default function Home() {
    const [pageData, setPageData] = useState([]);
-   const [isDataFetching, setDataFetching] = useState(false);
+   const [isLoading, setLoading] = useState(false);
    const [page, setPage] = useState(1);
 
    // note self -> single image & modal
    const [isModalVisible, setModalVisible] = useState(false);
    const [imageInfo, setImageInfo] = useState(null);
 
-   async function fetchData() {
-      const urlPageNo = `&page=${page}`;
-      const url = `${BASE_URL}/${urlPageNo}`;
-      try {
-         const response = await axios.get(
-            `https://api.unsplash.com/photos?page=${page}`,
-            {
-               headers: {
-                  Authorization: `Client-ID ${clientId}`
-               }
+   const observer = useRef();
+   const lastElement = useCallback(
+      (node) => {
+         if (isLoading) return;
+         if (observer.current) observer.current.disconnect();
+         observer.current = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+               setPage((prevPage) => prevPage + 1);
             }
-         );
-         console.log(page);
-         if (page === 1) {
-            return setPageData(response.data);
-         } else {
-            setPageData((prevData) => [...prevData, ...response.data]);
-            setDataFetching(false);
-         }
+         });
+         if (node) observer.current.observe(node);
+      },
+      [isLoading]
+   );
+
+   async function fetchData(page) {
+      try {
+         setLoading(true);
+         const response = await axios.get(`${BASE_URL}page=${page}`, {
+            headers: {
+               Authorization: `Client-ID ${clientId}`
+            }
+         });
+         setPageData((prevData) => [...prevData, ...response.data]);
+         setLoading(false);
       } catch (error) {
          console.log(error);
+      } finally {
+         setLoading(false);
       }
    }
 
-   const handleScroll = () => {
-      if (
-         window.innerHeight + document.documentElement.scrollTop >
-         document.documentElement.offsetHeight
-      ) {
-         setPage((prevState) => prevState + 1);
-         setDataFetching(true);
-      }
-   };
-
    useEffect(() => {
-      if (!isDataFetching) return;
-      fetchData();
-   }, [isDataFetching]);
-
-   useEffect(() => {
-      window.addEventListener('scroll', handleScroll);
-      return () => window.removeEventListener('scroll', handleScroll);
-   }, []);
-
-   useEffect(() => {
-      fetchData();
-   }, []);
+      fetchData(page);
+   }, [page]);
 
    const viewImageDetailsHandler = (image) => {
       setModalVisible(true);
@@ -73,17 +60,22 @@ export default function Home() {
    return (
       <Container>
          <h1>Image Gallary</h1>
-         <ImageGrid
-            pageData={pageData}
-            showImageModal={viewImageDetailsHandler}
-         />
+         {pageData.length > 0 ? (
+            <ImageGrid
+               pageData={pageData}
+               showImageModal={viewImageDetailsHandler}
+               lastElementRef={lastElement}
+            />
+         ) : (
+            <i className="bx bx-loader-alt bx-spin"></i>
+         )}
          {isModalVisible && (
             <ImageDetails
                imageInfo={imageInfo}
                setModalVisible={setModalVisible}
             />
          )}
-         {isDataFetching && <h1>Loading...</h1>}
+         {isLoading && <i className="bx bx-loader-alt bx-spin"></i>}
       </Container>
    );
 }
