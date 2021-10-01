@@ -63,7 +63,7 @@ export default function Home() {
    return (
       <Container>
          <div className="header">
-            <h1 className="heading">Image Gallary</h1>
+            <h1 className="heading">Image Gallery</h1>
          </div>
          {pageData.length > 0 && (
             <ImageGrid
