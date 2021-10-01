@@ -7,7 +7,7 @@
    position: fixed;
    background-color: hsla(0, 0%, 23%, 0.26);
 }
-.mainBody {
+.card {
    display: block;
    margin: 2rem auto auto;
    background-color: var(--white);
@@ -18,7 +18,7 @@
    justify-content: center;
    flex-direction: column;
 }
-.header {
+.cardHeader {
    display: flex;
    align-items: center;
    justify-content: space-between;
@@ -27,16 +27,27 @@
    font-size: 1.5rem;
    font-weight: 500;
 }
-.image {
-   width: 100%;
-   max-width: inherit;
+.cardBody {
+   display: flex;
+   justify-content: center;
+}
+.cardImage {
+   max-width: 40%;
    height: auto;
 }
-.info {
+
+.cardText {
+   margin: 0.5rem;
    color: var(--dark);
 }
-.info span {
+.cardText span {
    font-size: 0.9rem;
    font-weight: 600;
    color: var(--light);
+}
+
+@media screen and (max-width: 768px) {
+   .cardImage {
+      width: 98%;
+   }
 }

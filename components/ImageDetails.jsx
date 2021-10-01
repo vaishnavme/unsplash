@@ -10,8 +10,8 @@ export const ImageDetails = ({ imageInfo, setModalVisible }) => {
 
    return (
       <div className={styles.main}>
-         <div className={styles.mainBody}>
-            <div className={styles.header}>
+         <div className={styles.card}>
+            <div className={styles.cardHeader}>
                <div>
                   <h1 className={styles.heading}>{imageInfo.user.name}</h1>
                </div>
@@ -21,14 +21,17 @@ export const ImageDetails = ({ imageInfo, setModalVisible }) => {
                   </button>
                </div>
             </div>
-            <Image
-               src={imageInfo?.urls.regular}
-               alt={imageInfo?.description}
-               className={styles.image}
-               width={800}
-               height={600}
-            />
-            <div className={styles.info}>
+            <div className={styles.cardBody}>
+               <div className={styles.cardImage}>
+                  <Image
+                     src={imageInfo?.urls.regular}
+                     alt={imageInfo?.description}
+                     width={800}
+                     height={800}
+                  />
+               </div>
+            </div>
+            <div className={styles.cardText}>
                <p>
                   <span>Description: </span>
                   {imageInfo.alt_description || imageInfo.description}
