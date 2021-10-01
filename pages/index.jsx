@@ -5,6 +5,7 @@ import axios from 'axios';
 
 //api variables
 import { BASE_URL } from '../API';
+const clientId = process.env.NEXT_PUBLIC_API_KEY;
 
 export default function Home() {
    const [pageData, setPageData] = useState([]);
@@ -23,7 +24,7 @@ export default function Home() {
             `https://api.unsplash.com/photos?page=${page}`,
             {
                headers: {
-                  Authorization: `Client-ID piCNWVlHbIJOKun5DD0_V3UBTeNkwINd86b22r84eOA`
+                  Authorization: `Client-ID ${clientId}`
                }
             }
          );
