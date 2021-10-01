@@ -12,9 +12,7 @@
     "axios": "^0.22.0",
     "next": "11.1.2",
     "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-infinite-scroll-component": "^6.1.0",
-    "swr": "^1.0.1"
+    "react-dom": "17.0.2"
   },
   "devDependencies": {
     "eslint": "7.32.0",
