@@ -10,14 +10,16 @@ export const ImageGrid = ({ pageData, showImageModal, lastElementRef }) => {
          <div className={styles.action}>
             <button onClick={() => setGridViewActive(false)}>
                <i
-                  className={`bx bx-list-ul ${
+                  className={`bx xl bx-list-ul ${
                      !isGridViewActive && styles.active
                   }`}
                ></i>
             </button>
             <button onClick={() => setGridViewActive(true)}>
                <i
-                  className={`bx bxs-grid ${isGridViewActive && styles.active}`}
+                  className={`bx bxs-grid xl ${
+                     isGridViewActive && styles.active
+                  }`}
                ></i>
             </button>
          </div>
