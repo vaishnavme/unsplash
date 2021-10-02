@@ -15,6 +15,7 @@ export default function Home() {
    const [isModalVisible, setModalVisible] = useState(false);
    const [imageInfo, setImageInfo] = useState(null);
 
+   // observer
    const observer = useRef();
    const lastElement = useCallback(
       (node) => {
@@ -23,11 +24,13 @@ export default function Home() {
          observer.current = new IntersectionObserver(
             (entries) => {
                if (entries[0].isIntersecting) {
+                  //get first entrie of target element
                   setPage((prevPage) => prevPage + 1);
                }
             },
             { threshold: 1 }
          );
+         // observe current node
          if (node) observer.current.observe(node);
       },
       [isLoading]
@@ -63,7 +66,7 @@ export default function Home() {
    return (
       <Container>
          <div className="header">
-            <h1 className="heading">Image Gallary</h1>
+            <h1 className="heading">Image Gallery</h1>
          </div>
          {pageData.length > 0 && (
             <ImageGrid
