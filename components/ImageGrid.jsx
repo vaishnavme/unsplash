@@ -33,8 +33,8 @@ export const ImageGrid = ({ pageData, showImageModal, lastElementRef }) => {
                <div
                   key={image?.id}
                   style={{
-                     width: '350px',
-                     height: '400px',
+                     maxWidth: '350px',
+                     height: '350px',
                      position: 'relative'
                   }}
                   className={styles.gridItem}

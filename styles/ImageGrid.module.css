@@ -3,7 +3,7 @@
    gap: 1rem;
 }
 .grid4 {
-   grid-template-columns: repeat(4, 1fr) !important;
+   grid-template-columns: repeat(4, 1fr);
 }
 .grid1 {
    display: block;
