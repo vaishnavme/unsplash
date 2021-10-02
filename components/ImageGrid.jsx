@@ -32,6 +32,11 @@ export const ImageGrid = ({ pageData, showImageModal, lastElementRef }) => {
             {pageData?.map((image, index) => (
                <div
                   key={image?.id}
+                  style={{
+                     width: '350px',
+                     height: '400px',
+                     position: 'relative'
+                  }}
                   className={styles.gridItem}
                   onClick={() => showImageModal(image)}
                   ref={pageData.length === index + 1 ? lastElementRef : null}
@@ -39,9 +44,9 @@ export const ImageGrid = ({ pageData, showImageModal, lastElementRef }) => {
                   <Image
                      src={image.urls.regular}
                      alt={image.description}
-                     width={550}
-                     height={500}
-                     layout="responsive"
+                     layout="fill"
+                     objectFit="contain"
+                     className="hover"
                   />
                </div>
             ))}

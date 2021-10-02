@@ -1,9 +1,9 @@
 .container {
    display: grid;
-   gap: 1.2rem;
+   gap: 1rem;
 }
 .grid4 {
-   grid-template-columns: repeat(4, 1fr);
+   grid-template-columns: repeat(4, 1fr) !important;
 }
 .grid1 {
    display: block;
@@ -24,7 +24,6 @@
 }
 .gridItem:hover {
    cursor: pointer;
-   box-shadow: var(--box-shadow);
 }
 @media screen and (max-width: 768px) {
    .container {
