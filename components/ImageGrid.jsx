@@ -46,7 +46,6 @@ export const ImageGrid = ({ pageData, showImageModal, lastElementRef }) => {
                      alt={image.description}
                      layout="fill"
                      objectFit="contain"
-                     className="hover"
                   />
                </div>
             ))}

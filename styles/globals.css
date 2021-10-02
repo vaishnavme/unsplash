@@ -16,7 +16,6 @@ body {
 }
 
 a {
-   color: inherit;
    text-decoration: none;
 }
 button {
@@ -24,6 +23,7 @@ button {
    border: none;
    outline: none;
    cursor: pointer;
+   font-family: inherit;
 }
 .bx-x {
    font-size: 2rem;
@@ -49,4 +49,11 @@ button {
 }
 .xl {
    font-size: 2rem;
+}
+.button-link {
+   padding: 0.2rem 0.5rem;
+   background-color: #3ccc4f;
+}
+.button-link .btn {
+   color: var(--white);
 }
