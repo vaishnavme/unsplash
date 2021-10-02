@@ -16,33 +16,61 @@ export const ImageDetails = ({ imageInfo, setModalVisible }) => {
                   <h1 className={styles.heading}>{imageInfo.user.name}</h1>
                </div>
                <div>
-                  <button onClick={() => setModalVisible(false)}>
+                  <button
+                     aria-label="button-close"
+                     onClick={() => setModalVisible(false)}
+                  >
                      <i className="bx bx-x h1"></i>
                   </button>
                </div>
             </div>
             <div className={styles.cardBody}>
-               <div className={styles.cardImage}>
+               <div
+                  style={{
+                     width: '100%',
+                     maxWidth: '700px',
+                     minWidth: '350px',
+                     height: '550px',
+                     position: 'relative',
+                     zIndex: 26
+                  }}
+                  className={styles.cardImage}
+               >
                   <Image
                      src={imageInfo?.urls.regular}
                      alt={imageInfo?.description}
-                     width={800}
-                     height={800}
+                     layout="fill"
+                     objectFit="contain"
                   />
                </div>
             </div>
             <div className={styles.cardText}>
-               <p>
-                  <span>Description: </span>
-                  {imageInfo.alt_description || imageInfo.description}
-               </p>
-               <p>
-                  <span>Date: </span>
-                  {created}
-               </p>
-               <p>
-                  <span>Image By:</span> {imageInfo.user.name}
-               </p>
+               <div>
+                  <p>
+                     <span>Description: </span>
+                     {imageInfo.alt_description || imageInfo.description}
+                  </p>
+                  <p>
+                     <span>Date: </span>
+                     {created}
+                  </p>
+                  <p>
+                     <span>Image By:</span> {imageInfo.user.name}
+                  </p>
+               </div>
+               <div className={styles.cardActions}>
+                  <a
+                     className="button-link"
+                     href={imageInfo?.urls.full}
+                     target="_blank"
+                     rel="noreferrer"
+                     title="View Full Resolution"
+                  >
+                     <button aria-label="button-for-size" className="btn">
+                        Original Size
+                     </button>
+                  </a>
+               </div>
             </div>
          </div>
       </div>

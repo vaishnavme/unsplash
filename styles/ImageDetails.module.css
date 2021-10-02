@@ -37,6 +37,8 @@
 }
 
 .cardText {
+   display: flex;
+   justify-content: space-between;
    margin: 0.5rem;
    color: var(--dark);
 }
@@ -49,5 +51,11 @@
 @media screen and (max-width: 768px) {
    .cardImage {
       width: 98%;
+   }
+   .cardText {
+      flex-direction: column;
+   }
+   .cardActions {
+      margin: 0.5rem 0;
    }
 }
