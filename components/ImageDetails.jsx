@@ -34,7 +34,6 @@ export const ImageDetails = ({ imageInfo, setModalVisible }) => {
                      position: 'relative',
                      zIndex: 26
                   }}
-                  className={styles.cardImage}
                >
                   <Image
                      src={imageInfo?.urls.regular}

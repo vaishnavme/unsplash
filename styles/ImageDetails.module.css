@@ -31,10 +31,6 @@
    display: flex;
    justify-content: center;
 }
-.cardImage {
-   max-width: 40%;
-   height: auto;
-}
 
 .cardText {
    display: flex;
@@ -49,9 +45,6 @@
 }
 
 @media screen and (max-width: 768px) {
-   .cardImage {
-      width: 98%;
-   }
    .cardText {
       flex-direction: column;
    }
