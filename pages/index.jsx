@@ -6,6 +6,8 @@ import axios from 'axios';
 import { BASE_URL } from '../API';
 const clientId = process.env.NEXT_PUBLIC_API_KEY;
 
+import styles from '../styles/Home.module.css';
+
 export default function Home() {
    const [pageData, setPageData] = useState([]);
    const [isLoading, setLoading] = useState(false);
@@ -65,8 +67,8 @@ export default function Home() {
 
    return (
       <Container>
-         <div className="header">
-            <h1 className="heading">Image Gallery</h1>
+         <div className={styles.header}>
+            <h1 className={styles.heading}>Image Gallery</h1>
          </div>
          {pageData.length > 0 && (
             <ImageGrid
@@ -81,7 +83,11 @@ export default function Home() {
                setModalVisible={setModalVisible}
             />
          )}
-         {isLoading && <i className="bx bx-loader-alt bx-spin"></i>}
+         {isLoading && (
+            <div className={styles.loaderDiv}>
+               <i className="bx bx-loader-alt bx-spin"></i>
+            </div>
+         )}
       </Container>
    );
 }
